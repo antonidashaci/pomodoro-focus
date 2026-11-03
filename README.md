@@ -1,5 +1,7 @@
 # Pomodoro Focus
 
+**[Open the demo →](https://antonidashaci.github.io/pomodoro-focus/)**
+
 A pomodoro timer that is still correct after the tab has been in the background
 for an hour. Local-first, no dependencies, no build step.
 
