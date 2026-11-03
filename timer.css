@@ -1,0 +1,117 @@
+/* Timer, stats and chart, on top of styles.css */
+
+.label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 22px 0 8px;
+}
+
+.timer-card { text-align: center; padding: 26px 18px 22px; }
+
+.phase {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+body[data-phase="focus"] .phase { color: var(--accent); }
+
+.dial {
+  position: relative;
+  width: 232px;
+  max-width: 100%;
+  margin: 0 auto 14px;
+  aspect-ratio: 1;
+}
+.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.dial circle {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.track { stroke: var(--line); }
+.ring {
+  stroke: var(--accent);
+  stroke-dasharray: 339.29; /* 2 * pi * 54 */
+  transition: stroke-dashoffset .3s linear;
+}
+body[data-phase="shortBreak"] .ring,
+body[data-phase="longBreak"] .ring { stroke: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .ring { transition: none; }
+}
+
+.clock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: clamp(2.6rem, 14vw, 3.4rem);
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.rounds { margin: 0 0 16px; color: var(--muted); font-size: .85rem; letter-spacing: .25em; }
+
+.timer-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.timer-actions button { margin: 0; width: auto; min-width: 104px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.stats div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.stats dt { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.stats dd {
+  margin: 2px 0 0;
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.chart {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  height: 96px;
+}
+.chart li { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.chart .bar {
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+  opacity: .85;
+}
+.chart .bar.empty { background: var(--line); }
+.chart .day { font-size: .6rem; color: var(--muted); text-align: center; margin-top: 4px; }
+
+.row { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); margin-bottom: 10px; }
+@media (max-width: 620px) { .row { grid-template-columns: 1fr; } }
+
+label.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+  font-size: .9rem;
+  align-self: end;
+  padding-bottom: 8px;
+}
+label.check input { width: auto; margin: 0; }
+.danger { color: var(--error); }

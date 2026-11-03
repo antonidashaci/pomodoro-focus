@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pomodoro Focus</title>
+<meta name="description" content="A pomodoro timer that keeps correct time in a background tab, with a streak and session history. Local-first.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="timer.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>&#9201;</text></svg>">
+</head>
+<body>
+<header>
+  <h1>Pomodoro Focus</h1>
+  <p>
+    Correct in a background tab, on a locked phone, and after a laptop wakes up —
+    because it reads the clock instead of counting ticks.
+  </p>
+</header>
+
+<main>
+  <section class="timer-card" aria-labelledby="phase">
+    <h2 id="phase" class="phase">Focus</h2>
+
+    <div class="dial">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="track" cx="60" cy="60" r="54"></circle>
+        <circle id="ring" class="ring" cx="60" cy="60" r="54"></circle>
+      </svg>
+      <p id="clock" class="clock" role="timer" aria-live="off">25:00</p>
+    </div>
+
+    <p id="rounds" class="rounds" aria-live="polite"></p>
+
+    <div class="timer-actions">
+      <button id="toggle" type="button">Start</button>
+      <button id="reset" type="button" class="ghost">Reset</button>
+      <button id="skip" type="button" class="ghost">Skip</button>
+    </div>
+    <p id="caught-up" class="muted" role="status" aria-live="polite"></p>
+  </section>
+
+  <section aria-labelledby="stats-heading">
+    <h2 id="stats-heading">Today</h2>
+    <dl class="stats">
+      <div><dt>Sessions</dt><dd id="stat-sessions">0</dd></div>
+      <div><dt>Focused</dt><dd id="stat-minutes">0m</dd></div>
+      <div><dt>Streak</dt><dd id="stat-streak">0 days</dd></div>
+      <div><dt>All time</dt><dd id="stat-total">0</dd></div>
+    </dl>
+    <h3 class="label">Last 14 days</h3>
+    <ul id="chart" class="chart"></ul>
+  </section>
+
+  <section aria-labelledby="settings-heading">
+    <h2 id="settings-heading">Settings</h2>
+    <div class="row">
+      <label>Focus (min)
+        <input id="focusMinutes" type="number" min="1" max="180" value="25">
+      </label>
+      <label>Short break
+        <input id="shortBreakMinutes" type="number" min="1" max="60" value="5">
+      </label>
+      <label>Long break
+        <input id="longBreakMinutes" type="number" min="1" max="120" value="15">
+      </label>
+    </div>
+    <div class="row">
+      <label>Long break every
+        <input id="roundsPerCycle" type="number" min="1" max="12" value="4">
+      </label>
+      <label class="check">
+        <input id="autoStartBreaks" type="checkbox" checked> Auto-start breaks
+      </label>
+      <label class="check">
+        <input id="autoStartFocus" type="checkbox"> Auto-start focus
+      </label>
+    </div>
+    <div class="row">
+      <label class="check">
+        <input id="sound" type="checkbox" checked> Chime when a phase ends
+      </label>
+      <label class="check">
+        <input id="notify" type="checkbox"> Desktop notification
+      </label>
+      <label>&nbsp;
+        <button id="clear-history" type="button" class="ghost danger">Clear history</button>
+      </label>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>
+    Everything is stored in this browser.
+    <a href="https://github.com/antonidashaci/pomodoro-focus">Source</a>.
+  </p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
